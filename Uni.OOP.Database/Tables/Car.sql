@@ -12,6 +12,8 @@
   Transmission varchar(512),
   FuelEfficiency varchar(512),
   Condition varchar(2048) NOT NULL,
+  CreatedAt datetime NOT NULL,
+  ChangedAt datetime,
 
   CONSTRAINT PK_Car PRIMARY KEY (Car_ID)
 );
