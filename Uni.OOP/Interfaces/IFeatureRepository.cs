@@ -8,6 +8,11 @@ namespace Uni.OOP.Interfaces
     public interface IFeatureRepository
     {
         /// <summary>
+        /// Returns all car features.
+        /// </summary>
+        Task<List<Feature>> GetAllAsync();
+
+        /// <summary>
         /// Adds a brand new car feature.
         /// </summary>
         Task AddAsync(Feature feature);

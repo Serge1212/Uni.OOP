@@ -15,17 +15,30 @@ namespace Uni.OOP.Services
             _featureRepository = featureRepository;
         }
 
+        /// <inheritdoc />
+        public async Task ShowAllAsync()
+        {
+            var result = await _featureRepository.GetAllAsync();
+
+            foreach(var feature in result)
+            {
+                Console.WriteLine($"Feature name: {feature.Name}, Description: {feature.Description}");
+            }
+        }
+
+        /// <inheritdoc />
         public async Task AddAsync()
         {
             Console.WriteLine("Please enter the feature info in the following fashion: <Feature name>,<Feature description>");
 
             var result = Console.ReadLine();
 
-            var info = result.Split(',');
+            var info = result?.Split(',');
 
-            if (info is null || info.Length < 2)
+            if (info is null || info.Length != 2)
             {
                 Console.WriteLine("Invalid input, please try again.");
+                return;
             }
 
             var feature = new Feature

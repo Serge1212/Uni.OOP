@@ -27,7 +27,7 @@ namespace Uni.OOP.UI
         {
             var options = new List<Option>
             {
-                new Option("Text message test. (To be removed)", () => Console.WriteLine("This is a text message generated for test purposes")),
+                new Option("Show Car Features", async () => await _featureService.ShowAllAsync()),
                 new Option("Add Car Feature", async () => await _featureService.AddAsync()),
                 new Option("Exit", () => Environment.Exit(0)),
             };
