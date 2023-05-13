@@ -66,6 +66,16 @@
         public string Condition { get; set; }
 
         /// <summary>
+        /// The identifier of the stock where this car is located.
+        /// </summary>
+        public int StockId { get; set; }
+
+        /// <summary>
+        /// The stock information where this car is located.
+        /// </summary>
+        public Stock Stock { get; set; }
+
+        /// <summary>
         /// The features this car has.
         /// </summary>
         public List<Feature> Features { get; set; }

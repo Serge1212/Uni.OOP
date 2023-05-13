@@ -16,10 +16,13 @@ namespace Uni.OOP.UI
         int _currentIndex;
 
         readonly IFeatureService _featureService;
+        readonly ICarService _carService;
         public MenuHandler(
-            IFeatureService featureService)
+            IFeatureService featureService,
+            ICarService carService)
         {
             _featureService = featureService;
+            _carService = carService;
         }
 
         /// <inheritdoc />
@@ -27,6 +30,7 @@ namespace Uni.OOP.UI
         {
             var options = new List<Option>
             {
+                new Option("Add Car", async () => await _carService.AddAsync()),
                 new Option("Show Car Features", async () => await _featureService.ShowAllAsync()),
                 new Option("Add Car Feature", async () => await _featureService.AddAsync()),
                 new Option("Exit", () => Environment.Exit(0)),

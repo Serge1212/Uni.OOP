@@ -12,7 +12,6 @@ namespace Uni.OOP.Repositories
     public class FeatureRepository : IFeatureRepository
     {
         readonly SqlConnection _connection;
-
         public FeatureRepository(SqlConnection connection)
         {
             _connection = connection;

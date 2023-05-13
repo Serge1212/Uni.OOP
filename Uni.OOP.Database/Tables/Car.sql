@@ -10,7 +10,7 @@
   BodyType varchar(512),
   EngineType varchar(512),
   Transmission varchar(512),
-  FuelEfficiency varchar(512),
+  FuelEfficiency float,
   Condition varchar(2048) NOT NULL,
   CreatedAt datetime NOT NULL,
   ChangedAt datetime,

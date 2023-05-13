@@ -16,10 +16,13 @@ var builder = new HostBuilder()
         services.AddScoped<SqlConnection>(_ => new SqlConnection(connectionString));
 
         services.AddSingleton<IMenuHandler, MenuHandler>();
+
         // Repositories.
         services.AddScoped<IFeatureRepository, FeatureRepository>();
+        services.AddScoped<ICarRepository, CarRepository>();
         // Services.
         services.AddScoped<IFeatureService, FeatureService>();
+        services.AddScoped<ICarService, CarService>();
     }
 );
 
@@ -39,7 +42,7 @@ catch (Exception ex)
     Console.WriteLine($"Error occured: {ex.Message}: {ex.StackTrace}");
 }
 
-string GetDbConnectionString()
+static string GetDbConnectionString()
 {
     // Values are displayed as is on purpose to avoid excessive work while connection establishing.
     var server = "(localdb)\\mssqllocaldb";
