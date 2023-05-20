@@ -46,25 +46,40 @@ namespace Uni.OOP.Services
             // Parse values.
             DateTime.TryParseExact(info[4].Trim(), "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime producedAt);
             DateTime.TryParseExact(info[5].Trim(), "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime importedAt);
-            int.TryParse(info[0], out int stockId);
-            decimal.TryParse(info[3], out decimal price);
-            double.TryParse(info[10], out double fuelEfficiency);
 
+            if (int.TryParse(info[0], out int stockId))
+            {
+                Console.WriteLine("The stock identifier is invalid, please try again.");
+                return;
+            }
 
-            var car = new Car();
+            if (decimal.TryParse(info[3], out decimal price))
+            {
+                Console.WriteLine("The price is invalid, please try again.");
+                return;
+            }
 
-            car.StockId = stockId;
-            car.Make = info[1].ToString();
-            car.Model = info[2].ToString();
-            car.Price = price;
-            car.ProducedAt = producedAt;
-            car.ImportedAt = importedAt;
-            car.Color = info[6].ToString();
-            car.BodyType = info[7].ToString();
-            car.EngineType = info[8].ToString();
-            car.Transmission = info[9].ToString();
-            car.FuelEfficiency = fuelEfficiency;
-            car.Condition = info[11].ToString();
+            if (double.TryParse(info[10], out double fuelEfficiency))
+            {
+                Console.WriteLine("The fuel efficiency is invalid, please try again.");
+                return;
+            }
+
+            var car = new Car
+            {
+                StockId = stockId,
+                Make = info[1].ToString(),
+                Model = info[2].ToString(),
+                Price = price,
+                ProducedAt = producedAt,
+                ImportedAt = importedAt,
+                Color = info[6].ToString(),
+                BodyType = info[7].ToString(),
+                EngineType = info[8].ToString(),
+                Transmission = info[9].ToString(),
+                FuelEfficiency = fuelEfficiency,
+                Condition = info[11].ToString()
+            };
 
             await _carRepository.AddAsync(car);
             Console.WriteLine("The car has been added.");
