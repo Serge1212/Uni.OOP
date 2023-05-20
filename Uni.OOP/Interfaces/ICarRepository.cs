@@ -8,6 +8,11 @@ namespace Uni.OOP.Interfaces
     public interface ICarRepository
     {
         /// <summary>
+        /// Returns all cars.
+        /// </summary>
+        Task<List<Car>> GetAllAsync();
+
+        /// <summary>
         /// Adds a brand new car.
         /// </summary>
         Task AddAsync(Car car);

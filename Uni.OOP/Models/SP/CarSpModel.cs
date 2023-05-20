@@ -1,14 +1,16 @@
-﻿namespace Uni.OOP.Models
+﻿namespace Uni.OOP.Models.SP
 {
-    /// <summary>
-    /// The car model. Contains all information about a car.
-    /// </summary>
-    public class Car
+    public class CarSpModel
     {
         /// <summary>
         /// The car's unique identifier.
         /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// The identifier of the stock where this car is located.
+        /// </summary>
+        public int StockId { get; set; }
 
         /// <summary>
         /// The car's manufacturer.
@@ -66,13 +68,50 @@
         public string Condition { get; set; }
 
         /// <summary>
-        /// The identifier of the stock where this car is located.
+        /// The street of related stock.
         /// </summary>
-        public int StockId { get; set; }
+        public string StockStreet { get; set; }
 
         /// <summary>
-        /// The stock information where this car is located.
+        /// The city of related stock.
         /// </summary>
-        public Stock Stock { get; set; }
+        public string StockCity { get; set; }
+
+        /// <summary>
+        /// The country of related stock.
+        /// </summary>
+        public string StockCountry { get; set; }
+
+        /// <summary>
+        /// The postal code of related stock.
+        /// </summary>
+        public string StockPostalCode { get; set; }
+
+        public Car ToModel()
+        {
+            return new Car
+            {
+                Id = Id,
+                StockId = StockId,
+                Make = Make,
+                Model = Model,
+                Price = Price,
+                ProducedAt = ProducedAt,
+                ImportedAt = ImportedAt,
+                Color = Color,
+                BodyType = BodyType,
+                EngineType = EngineType,
+                Transmission = Transmission,
+                FuelEfficiency = FuelEfficiency,
+                Condition = Condition,
+                Stock = new Stock
+                {
+                    Street = StockStreet,
+                    City = StockCity,
+                    Country = StockCountry,
+                    PostalCode = StockPostalCode,
+                }
+            };
+        }
     }
 }

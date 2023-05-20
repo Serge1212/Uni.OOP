@@ -17,6 +17,29 @@ namespace Uni.OOP.Services
         }
 
         /// <inheritdoc />
+        public async Task ShowAllAsync()
+        {
+            var result = await _carRepository.GetAllAsync();
+
+            foreach (var car in result)
+            {
+                Console.WriteLine($"" +
+                    $"Car number: {car.Id}, " +
+                    $"Stock address: {car.Stock.City} {car.Stock.Street} st, {car.Stock.PostalCode}, {car.Stock.Country}, " +
+                    $"Make: {car.Make}, " +
+                    $"Model: {car.Model}, " +
+                    $"Price: {car.Price}, " +
+                    $"Make: {car.ProducedAt}, " +
+                    $"Make: {car.ImportedAt}, " +
+                    $"Make: {car.Color}, " +
+                    $"Make: {car.BodyType}, " +
+                    $"Make: {car.EngineType}, " +
+                    $"Make: {car.FuelEfficiency}, " +
+                    $"Make: {car.Condition}, ");
+            }
+        }
+
+        /// <inheritdoc />
         public async Task AddAsync()
         {
             Console.WriteLine("Please enter the feature info in the following fashion: " +
@@ -47,19 +70,19 @@ namespace Uni.OOP.Services
             DateTime.TryParseExact(info[4].Trim(), "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime producedAt);
             DateTime.TryParseExact(info[5].Trim(), "d/M/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime importedAt);
 
-            if (int.TryParse(info[0], out int stockId))
+            if (!int.TryParse(info[0], out int stockId))
             {
                 Console.WriteLine("The stock identifier is invalid, please try again.");
                 return;
             }
 
-            if (decimal.TryParse(info[3], out decimal price))
+            if (!decimal.TryParse(info[3], out decimal price))
             {
                 Console.WriteLine("The price is invalid, please try again.");
                 return;
             }
 
-            if (double.TryParse(info[10], out double fuelEfficiency))
+            if (!double.TryParse(info[10], out double fuelEfficiency))
             {
                 Console.WriteLine("The fuel efficiency is invalid, please try again.");
                 return;

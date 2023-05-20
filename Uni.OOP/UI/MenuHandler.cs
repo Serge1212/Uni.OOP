@@ -28,8 +28,10 @@ namespace Uni.OOP.UI
         /// <inheritdoc />
         public void DisplayMenu()
         {
+            
             var options = new List<Option>
             {
+                new Option("Show Cars", async () => await _carService.ShowAllAsync()),
                 new Option("Add Car", async () => await _carService.AddAsync()),
                 new Option("Show Car Features", async () => await _featureService.ShowAllAsync()),
                 new Option("Add Car Feature", async () => await _featureService.AddAsync()),
@@ -65,7 +67,7 @@ namespace Uni.OOP.UI
 
         void ListenMenu(List<Option> options)
         {
-            // Store key info in here.
+            // Actual selected key.
             ConsoleKeyInfo keyinfo;
             do
             {
@@ -88,7 +90,7 @@ namespace Uni.OOP.UI
                         RenderMenu(options, options[_currentIndex]);
                     }
                 }
-                // Handle different action for the option
+                // Handle Select action for the option.
                 if (keyinfo.Key == ConsoleKey.Enter)
                 {
                     options[_currentIndex].Handler.Invoke();

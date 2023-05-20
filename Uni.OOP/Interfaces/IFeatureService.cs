@@ -8,7 +8,7 @@ namespace Uni.OOP.Interfaces
     public interface IFeatureService
     {
         /// <summary>
-        /// Returns all car features.
+        /// Shows all car features.
         /// </summary>
         Task ShowAllAsync();
 

@@ -6,6 +6,11 @@
     public interface ICarService
     {
         /// <summary>
+        /// Shows all cars.
+        /// </summary>
+        Task ShowAllAsync();
+
+        /// <summary>
         /// Adds a brand new car.
         /// </summary>
         Task AddAsync();

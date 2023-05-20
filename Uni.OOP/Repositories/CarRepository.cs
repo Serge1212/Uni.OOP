@@ -1,6 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
+using Uni.OOP.Extensions;
 using Uni.OOP.Interfaces;
 using Uni.OOP.Models;
+using Uni.OOP.Models.SP;
 
 namespace Uni.OOP.Repositories
 {
@@ -13,6 +15,28 @@ namespace Uni.OOP.Repositories
         public CarRepository(SqlConnection connection)
         {
             _connection = connection;
+        }
+
+        /// <inheritdoc />
+        public async Task<List<Car>> GetAllAsync()
+        {
+            // Declare.
+            using var command = new SqlCommand()
+            {
+                Connection = _connection,
+                CommandType = System.Data.CommandType.StoredProcedure,
+                CommandText = "dbo.sel_Car",
+            };
+
+            // Execute.
+            await _connection.OpenAsync();
+            await using var reader = await command.ExecuteReaderAsync();
+
+            // Map.
+            var result = reader.MapToCollection<CarSpModel>().Select(c => c.ToModel()).ToList();
+            await _connection.CloseAsync();
+
+            return result;
         }
 
         /// <inheritdoc />
